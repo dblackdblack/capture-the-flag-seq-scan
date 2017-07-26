@@ -1,10 +1,12 @@
 FROM ubuntu:xenial
 
-ENV _PIP_VERSION=9.0.1
+ENV _PIP_VERSION=9.0.1 \
+    LC_ALL=en_US.UTF-8
 
 RUN apt-get update \
   && apt-get -y upgrade \
   && apt-get -y install \
+      locales \
       apt-transport-https \
       curl \
       wget \
