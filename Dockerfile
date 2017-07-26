@@ -20,7 +20,7 @@ RUN apt-get update \
   && locale-gen en_US.UTF-8 \
   && dpkg-reconfigure locales \
   && easy_install3 pip==$_PIP_VERSION \
-  && install -d /app -o nobody -g nobody -m 0755
+  && install -d /app -o nobody -g nogroup -m 0755
 
 COPY [".", "/app"]
 
