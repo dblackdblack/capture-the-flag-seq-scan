@@ -22,7 +22,7 @@ RUN apt-get update \
   && easy_install3 pip==$_PIP_VERSION \
   && install -d /app -o nobody -g nogroup -m 0755
 
-COPY [".", "/app"]
+COPY [".", "/app/"]
 
 RUN pip3 install -r /app/requirements.txt
 
