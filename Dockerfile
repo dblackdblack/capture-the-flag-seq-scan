@@ -17,7 +17,8 @@ RUN apt-get update \
       python3-setuptools \
       postgresql-9.5 \
   && easy_install3 pip==$_PIP_VERSION \
-  && pip3 install gunicorn virtualenv
+  && pip3 install gunicorn virtualenv \
+  && dpkg-reconfigure locales
   
 RUN service postgresql start \
   && su - postgres -c "createuser --superuser dbuser" \
