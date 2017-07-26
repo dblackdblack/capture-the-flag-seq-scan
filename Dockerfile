@@ -28,4 +28,5 @@ RUN pip3 install -r /app/requirements.txt
 
 RUN service postgresql start \
   && su - postgres -c "createuser --superuser dbuser" \
+  && su - postgres -c "psql -c\"alter user dbuser with password 'secret123'\"" \
   && service postgresql stop
