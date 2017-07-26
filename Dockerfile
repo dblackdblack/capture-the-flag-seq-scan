@@ -17,15 +17,15 @@ RUN apt-get update \
       python3-dev \
       python3-setuptools \
       postgresql-9.5 \
-  && easy_install3 pip==$_PIP_VERSION \
-  && pip3 install \
-        gunicorn \
-        virtualenv \
-        flask \
-        flask-sqlalchemy \
   && locale-gen en_US.UTF-8 \
-  && dpkg-reconfigure locales
-  
+  && dpkg-reconfigure locales \
+  && easy_install3 pip==$_PIP_VERSION \
+  && install -d /app -o nobody -g nobody -m 0755
+
+COPY [".", "/app"]
+
+RUN pip3 install -r /app/requirements.txt
+
 RUN service postgresql start \
   && su - postgres -c "createuser --superuser dbuser" \
   && service postgresql stop
