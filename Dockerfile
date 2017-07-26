@@ -14,3 +14,7 @@ RUN apt-get update \
       postgresql-9.5 \
   && easy_install3 pip==$_PIP_VERSION \
   && pip3 install gunicorn virtualenv
+  
+RUN service postgresql start \
+  && su - postgres -c "createuser --superuser dbuser" \
+  && service postgresql stop
