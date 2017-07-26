@@ -4,5 +4,5 @@ ENV _PIP_VERSION=9.0.1
 
 RUN apt-get update \
   && apt-get -y upgrade \
-  && apt-get -y install python3-setuptools \
+  && apt-get -y install curl wget ca-certificates python3-setuptools \
   && easy_install3 pip==$_PIP_VERSION
