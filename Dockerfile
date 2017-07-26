@@ -17,7 +17,11 @@ RUN apt-get update \
       python3-setuptools \
       postgresql-9.5 \
   && easy_install3 pip==$_PIP_VERSION \
-  && pip3 install gunicorn virtualenv \
+  && pip3 install \
+        gunicorn \
+        virtualenv \
+        flask \
+        flask-sqlalchemy \
   && locale-gen en_US.UTF-8 \
   && dpkg-reconfigure locales
   
