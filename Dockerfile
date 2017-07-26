@@ -18,6 +18,7 @@ RUN apt-get update \
       postgresql-9.5 \
   && easy_install3 pip==$_PIP_VERSION \
   && pip3 install gunicorn virtualenv \
+  && locale-gen en_US.UTF-8 \
   && dpkg-reconfigure locales
   
 RUN service postgresql start \
