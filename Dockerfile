@@ -37,4 +37,11 @@ RUN su - postgres -c "pg_dropcluster --stop ${POSTGRES_VERSION} main" \
   && service postgresql stop
 
 COPY ["app", "/app/app/"]
+COPY ["init_app.py", "/app/"]
+
 ENV DATABASE_URL=postgresql://dbuser:secret123@localhost:5432/db
+RUN service postgresql start \
+  && cd /app \
+  && python3 init_app.py \
+  && service postgresql stop
+
