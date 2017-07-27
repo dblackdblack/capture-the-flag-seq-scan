@@ -36,5 +36,5 @@ RUN su - postgres -c "pg_dropcluster --stop ${POSTGRES_VERSION} main" \
   && su - postgres -c "createdb --owner dbuser --locale en_US.UTF-8 db" \
   && service postgresql stop
 
-COPY ["app", "/app/"]
+COPY ["app", "/app/app/"]
 ENV DATABASE_URL=postgresql://dbuser:secret123@localhost:5432/db
