@@ -6,11 +6,13 @@ import random
 
 app.app.db.create_all()
 
-allnames = set(names.get_full_name() for _ in range(int(10_000_000)))
+allnames = set(names.get_full_name() for _ in range(int(1E5)))
 for name in allnames:
-    firstname = names.get_first_name()
+    firstname = name.split(' ')[0]
     email = '{}{}@example.com'.format(firstname, random.randint(1, 10E6))
-    app.app.add_user(username=name, email=email)
+    app.app.add_user(full_name=name, email=email, commit=False)
+
+app.app.db.session.commit()
 
 with open('/user_to_find', 'w') as fp:
     print(email, file=fp)

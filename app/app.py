@@ -2,7 +2,7 @@
 
 import os
 
-from flask import Flask
+from flask import Flask, abort
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -13,19 +13,29 @@ db = SQLAlchemy(app)
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
+    full_name = db.Column(db.String(120))
+    email = db.Column(db.String(120))
 
-    def __init__(self, username, email):
-        self.username = username
+    def __init__(self, full_name, email):
+        self.full_name = full_name
         self.email = email
 
     def __repr__(self):
         return '<User %r>' % self.username
 
 
-def add_user(username, email):
-    user = Users(username=username, email=email)
+@app.route('/user/<email>', methods=['GET'])
+def get_user(email):
+    try:
+        user = Users.query.filter_by(email=email).first()
+        return user.full_name + "\n"
+    except:
+        abort(404)
+
+
+def add_user(full_name, email, commit=True):
+    user = Users(full_name=full_name, email=email)
     db.session.add(user)
-    db.session.commit()
+    if commit:
+        db.session.commit()
 

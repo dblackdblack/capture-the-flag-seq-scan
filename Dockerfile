@@ -45,3 +45,6 @@ RUN service postgresql start \
   && python3 init_app.py \
   && service postgresql stop
 
+COPY ["cmd.sh", "/"]
+EXPOSE 8000
+CMD ["/cmd.sh"]
