@@ -20,8 +20,6 @@ RUN apt-get update \
       python3-dev \
       python3-setuptools \
       postgresql-${POSTGRES_VERSION} \
-      libpq-dev \
-      build-essential \
   && easy_install3 pip==$_PIP_VERSION \
   && install -d /app -o nobody -g nogroup -m 0755
 
