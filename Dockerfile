@@ -11,8 +11,10 @@ ENV _PIP_VERSION=9.0.1 \
 RUN apt-get update \
   && apt-get -y upgrade \
   && apt-get -y install locales \
+  && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
   && locale-gen en_US.UTF-8 \
   && dpkg-reconfigure locales \
+  && /usr/sbin/update-locale LANG=en_US.UTF-8 \
   && apt-get -y install \
       apt-transport-https \
       curl \
@@ -28,8 +30,7 @@ COPY ["requirements.txt", "/app/"]
 
 RUN pip3 install -r /app/requirements.txt
 
-RUN su - postgres -c "pg_dropcluster --stop ${POSTGRES_VERSION} main" \
-  && pg_createcluster --locale en_US.UTF-8 --start ${POSTGRES_VERSION} main \
+RUN pg_createcluster --locale en_US.UTF-8 --start ${POSTGRES_VERSION} main \
   && su - postgres -c "createuser --superuser dbuser" \
   && su - postgres -c "psql -c\"alter user dbuser with password 'secret123'\"" \
   && su - postgres -c "createdb --owner dbuser --locale en_US.UTF-8 db" \
