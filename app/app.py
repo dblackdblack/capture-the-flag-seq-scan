@@ -26,11 +26,10 @@ class Users(db.Model):
 
 @app.route('/user/<email>', methods=['GET'])
 def get_user(email):
-    try:
-        user = Users.query.filter_by(email=email).first()
-        return user.full_name + "\n"
-    except:
+    user = Users.query.filter_by(email=email).first()
+    if user is None:
         abort(404)
+    return user.full_name + "\n"
 
 
 def add_user(full_name, email, commit=True):

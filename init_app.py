@@ -6,7 +6,7 @@ import random
 
 app.app.db.create_all()
 
-allnames = set(names.get_full_name() for _ in range(int(10)))
+allnames = set(names.get_full_name() for _ in range(int(250000)))
 for name in allnames:
     firstname = name.split(' ')[0]
     email = '{}{}@example.com'.format(firstname, random.randint(1, 10E6))
