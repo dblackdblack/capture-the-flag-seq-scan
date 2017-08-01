@@ -1,11 +1,12 @@
-FROM ubuntu:xenial
+#FROM ubuntu:xenial
+FROM postgres:9.6
 
 ENV _PIP_VERSION=9.0.1 \
     LC_ALL=en_US.UTF-8 \
     LC_CTYPE=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     DEBIAN_FRONTEND=noninteractive \
-    POSTGRES_VERSION=9.5 
+    POSTGRES_VERSION=9.6 
 
 RUN apt-get update \
   && apt-get -y upgrade \
