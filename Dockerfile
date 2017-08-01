@@ -20,7 +20,7 @@ RUN apt-get update \
       curl \
       wget \
       vim \
-      emacs \
+      emacs-nox \
       nano \
       ca-certificates \
       python3-dev \
