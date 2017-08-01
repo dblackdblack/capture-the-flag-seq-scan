@@ -20,6 +20,8 @@ RUN apt-get update \
       curl \
       wget \
       vim \
+      emacs \
+      nano \
       ca-certificates \
       python3-dev \
       python3-setuptools \
