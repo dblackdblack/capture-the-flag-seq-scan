@@ -8,6 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+if os.getenv('DEBUG', '').lower() in ('1', 'true'):
+    app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
 
@@ -26,11 +28,10 @@ class Users(db.Model):
 
 @app.route('/user/<email>', methods=['GET'])
 def get_user(email):
-    try:
-        user = Users.query.filter_by(email=email).first()
-        return user.full_name + "\n"
-    except:
+    user = Users.query.filter_by(email=email).first()
+    if user is None:
         abort(404)
+    return user.full_name + "\n"
 
 
 def add_user(full_name, email, commit=True):
