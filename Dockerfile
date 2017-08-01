@@ -19,6 +19,7 @@ RUN apt-get update \
       apt-transport-https \
       curl \
       wget \
+      vim \
       ca-certificates \
       python3-dev \
       python3-setuptools \
